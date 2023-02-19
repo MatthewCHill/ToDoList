@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ToDoListTableViewCellDelegate: AnyObject {
+    func importantButtonWasTapped(cell: ToDoListTableViewCell)
+}
+
 class ToDoListTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
@@ -14,6 +18,10 @@ class ToDoListTableViewCell: UITableViewCell {
     @IBOutlet weak var importantTaskButton: UIButton!
     @IBOutlet weak var numberOfToDoLabel: UILabel!
     @IBOutlet weak var toDoListNameLabel: UILabel!
+    
+    // MARK: -
+    
+    weak var delegate: ToDoListTableViewCellDelegate?
     
     var toDo: ToDoList? {
         didSet {
@@ -35,6 +43,7 @@ class ToDoListTableViewCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func ImportantToDoButtonTapped(_ sender: Any) {
+        delegate?.importantButtonWasTapped(cell: self)
     }
     
 }

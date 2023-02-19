@@ -44,6 +44,8 @@ class ToDoListTableViewController: UITableViewController {
         let toDos = ToDoListController.shared.toDoLists[indexPath.row]
         cell.toDo = toDos
         
+        cell.delegate = self
+        
 
         return cell
     }
@@ -73,3 +75,15 @@ class ToDoListTableViewController: UITableViewController {
     }
     
 } //End Of Class
+
+// MARK: - Extensions
+extension ToDoListTableViewController: ToDoListTableViewCellDelegate {
+    func importantButtonWasTapped(cell: ToDoListTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        let toDo = ToDoListController.shared.toDoLists[indexPath.row]
+        ToDoListController.shared.toggleIsImportant(toDoList: toDo)
+        cell.toDo = toDo
+    }
+    
+    
+}
