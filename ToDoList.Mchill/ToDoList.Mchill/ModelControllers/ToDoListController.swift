@@ -17,11 +17,16 @@ class ToDoListController{
     func create(name: String) {
         let listOfItemsToDo = ToDoList(name: name)
             toDoLists.append(listOfItemsToDo)
+        save()
     }
     func delete(toDoListToDelete: ToDoList) {
         guard let index = toDoLists.firstIndex(of: toDoListToDelete) else { return }
         toDoLists.remove(at: index)
         
+    }
+    func toggleIsImportant(toDoList: ToDoList) {
+        toDoList.isImportant.toggle()
+        save()
     }
     
     // MARK: - Persistence
