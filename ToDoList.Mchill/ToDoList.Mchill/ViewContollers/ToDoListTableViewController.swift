@@ -22,8 +22,8 @@ class ToDoListTableViewController: UITableViewController {
     }
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            userTypingInputAlertController()
             self.tableView.reloadData()
+            userTypingInputAlertController()
         }
     
     // MARK: - Actions
@@ -33,6 +33,9 @@ class ToDoListTableViewController: UITableViewController {
         updateUI()
     }
     
+    @IBAction func newToDoListTextFieldTapped(_ sender: Any) {
+        userTypingInputAlertController()
+    }
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,11 +84,12 @@ class ToDoListTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     func userTypingInputAlertController() {
-        let alertController = UIAlertController(title: "", message: "Speed up your typing by sliding your finger accross the letters to compse a word.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "", message: "Speed up your typing by sliding your finger accross the letters to compse a word.", preferredStyle: .actionSheet)
         let continueAction = UIAlertAction(title: "Continue", style: .cancel)
         
         alertController.addAction(continueAction)
         present(alertController, animated: true)
+        tableView.reloadData()
                 
     }
     
