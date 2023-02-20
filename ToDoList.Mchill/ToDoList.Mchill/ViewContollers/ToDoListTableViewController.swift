@@ -19,7 +19,6 @@ class ToDoListTableViewController: UITableViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        userTypingInputAlertController()
     }
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -80,15 +79,15 @@ class ToDoListTableViewController: UITableViewController {
     func updateUI() {
         self.tableView.reloadData()
     }
-    func userTypingInputAlertController() {
-        let alertController = UIAlertController(title: "", message: "Speed up your typing by sliding your finger accross the letters to compse a word.", preferredStyle: .actionSheet)
-        let continueAction = UIAlertAction(title: "Continue", style: .cancel)
-        
-        alertController.addAction(continueAction)
-        present(alertController, animated: true)
-        tableView.reloadData()
-                
-    }
+//    func userTypingInputAlertController() {
+//        let alertController = UIAlertController(title: "", message: "Speed up your typing by sliding your finger accross the letters to compse a word.", preferredStyle: .actionSheet)
+//        let continueAction = UIAlertAction(title: "Continue", style: .cancel)
+//
+//        alertController.addAction(continueAction)
+//        present(alertController, animated: true)
+//        tableView.reloadData()
+//
+//    }
     
 } //End Of Class
 
