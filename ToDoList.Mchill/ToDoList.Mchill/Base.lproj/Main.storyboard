@@ -112,7 +112,7 @@
                                     <outlet property="importantTaskButton" destination="zBi-wf-jvG" id="cyX-Sg-dLK"/>
                                     <outlet property="numberOfToDoLabel" destination="7B0-p2-Nga" id="ocl-LY-e44"/>
                                     <outlet property="toDoListNameLabel" destination="fyG-3I-nSW" id="ETw-6F-sTM"/>
-                                    <segue destination="BnY-ny-KLO" kind="show" id="Zaf-xB-MMa"/>
+                                    <segue destination="BnY-ny-KLO" kind="show" identifier="toTaskList" id="Zaf-xB-MMa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -161,6 +161,9 @@
                                                     <integer key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="addTaskButtonTapped:" destination="BnY-ny-KLO" eventType="touchUpInside" id="rUO-Na-PHR"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -174,7 +177,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="73" id="RV7-ci-IOk" customClass="TaskListTableViewCell" customModule="ToDoList_Mchill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="73" id="RV7-ci-IOk" customClass="TaskListTableViewCell" customModule="ToDoList_Mchill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="111" width="393" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RV7-ci-IOk" id="Yl9-mG-6ti">
@@ -194,6 +197,9 @@
                                                     <rect key="frame" x="288" y="0.0" width="49" height="35"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="checkmark.square" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="taskCompletedButtonTapped:" destination="RV7-ci-IOk" eventType="touchUpInside" id="UAj-iA-9ik"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -205,6 +211,10 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="zUK-1V-eR6" secondAttribute="bottom" constant="8" id="rwv-TR-hL0"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskCompletedButton" destination="4tO-rE-0Vg" id="xs8-Pe-fXS"/>
+                                    <outlet property="taskNameLabel" destination="b7q-4t-anN" id="8xz-FQ-3kn"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -213,6 +223,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="o6b-Ep-fJB"/>
+                    <connections>
+                        <outlet property="toDoTaskTextField" destination="uJD-wA-3ov" id="Zhe-jz-xqa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvb-nX-BXN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
