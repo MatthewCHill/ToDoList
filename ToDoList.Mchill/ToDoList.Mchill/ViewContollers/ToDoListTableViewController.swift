@@ -20,6 +20,11 @@ class ToDoListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            self.tableView.reloadData()
+        }
+    
     // MARK: - Actions
     
     @IBAction func createToDoButtonTapped(_ sender: Any) {
@@ -27,10 +32,7 @@ class ToDoListTableViewController: UITableViewController {
         updateUI()
     }
     
-
     // MARK: - Table view data source
-
-
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -50,10 +52,10 @@ class ToDoListTableViewController: UITableViewController {
         return cell
     }
     
-
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            let toDo = ToDoListController.shared.toDoLists[indexPath.row]
+            ToDoListController.shared.delete(toDoListToDelete: toDo)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -62,10 +64,13 @@ class ToDoListTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard segue.identifier == "toTaskList",
+              let destinationVC = segue.destination as? ToDoListStepsTableViewController,
+              let indexPath = tableView.indexPathForSelectedRow else {return}
+        let toDoList = ToDoListController.shared.toDoLists[indexPath.row]
+        destinationVC.toDoList = toDoList
     }
+    
     // MARK: - Functions
     func createToDo(){
         guard let toDoList = toDoListTextField.text , !toDoList.isEmpty else {return}
