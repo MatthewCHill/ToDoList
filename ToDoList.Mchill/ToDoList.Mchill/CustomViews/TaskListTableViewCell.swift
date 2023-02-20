@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskListTableViewCellDelegate: AnyObject {
+    func taskCompletedButtonTapped(cell: TaskListTableViewCell )
+}
+
 class TaskListTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
@@ -14,6 +18,10 @@ class TaskListTableViewCell: UITableViewCell {
     @IBOutlet weak var taskNameLabel: UILabel!
     
     @IBOutlet weak var taskCompletedButton: UIButton!
+    
+    // MARK: - Properties
+    
+    weak var delegate: TaskListTableViewCellDelegate?
     
     // MARK: - functions
     
@@ -28,6 +36,7 @@ class TaskListTableViewCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func taskCompletedButtonTapped(_ sender: Any) {
+        delegate?.taskCompletedButtonTapped(cell: self)
     }
     
     

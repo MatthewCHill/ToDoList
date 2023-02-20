@@ -19,7 +19,7 @@ class ToDoListTableViewCell: UITableViewCell {
     @IBOutlet weak var numberOfToDoLabel: UILabel!
     @IBOutlet weak var toDoListNameLabel: UILabel!
     
-    // MARK: -
+    // MARK: - Properties
     
     weak var delegate: ToDoListTableViewCellDelegate?
     

@@ -42,6 +42,7 @@ class ToDoListStepsTableViewController: UITableViewController {
               let task = toDoList?.task[indexPath.row]  else {return UITableViewCell()}
         cell.updateViews(task: task)
         
+        cell.delegate = self
 
         return cell
     }
@@ -73,14 +74,19 @@ class ToDoListStepsTableViewController: UITableViewController {
 
 
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+
+// MARK: - Extensions
+
+extension ToDoListStepsTableViewController: TaskListTableViewCellDelegate {
+    func taskCompletedButtonTapped(cell: TaskListTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell),
+        let toDoList = self.toDoList else {return}
+        let task = toDoList.task[indexPath.row]
+        TaskController().toggleIsCompleted(task: task)
+        updateUI()
     }
-    */
-
+    
+    
 }
