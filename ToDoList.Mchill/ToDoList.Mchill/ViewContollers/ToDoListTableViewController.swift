@@ -22,6 +22,7 @@ class ToDoListTableViewController: UITableViewController {
     }
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            userTypingInputAlertController()
             self.tableView.reloadData()
         }
     
@@ -78,6 +79,14 @@ class ToDoListTableViewController: UITableViewController {
     }
     func updateUI() {
         self.tableView.reloadData()
+    }
+    func userTypingInputAlertController() {
+        let alertController = UIAlertController(title: "", message: "Speed up your typing by sliding your finger accross the letters to compse a word.", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .cancel)
+        
+        alertController.addAction(continueAction)
+        present(alertController, animated: true)
+                
     }
     
 } //End Of Class
