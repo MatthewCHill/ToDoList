@@ -70,7 +70,15 @@ class ToDoListStepsTableViewController: UITableViewController {
     func updateUI() {
         self.tableView.reloadData()
     }
-    
+    func deleteTaskAndToDoWhenCompleted() {
+        let alertController = UIAlertController(title: "All Done!", message: "Want us to delete this list?", preferredStyle: .alert)
+        let dontDelete = UIAlertAction(title: "No", style: .cancel)
+        let yesDelete = UIAlertAction(title: "yes", style: .destructive)
+        
+        alertController.addAction(dontDelete)
+        alertController.addAction(yesDelete)
+        present(alertController, animated: true)
+    }
 
 
 
@@ -85,6 +93,12 @@ extension ToDoListStepsTableViewController: TaskListTableViewCellDelegate {
         let toDoList = self.toDoList else {return}
         let task = toDoList.task[indexPath.row]
         TaskController().toggleIsCompleted(task: task)
+        if task.isComplete == true {
+            deleteTaskAndToDoWhenCompleted()
+        }
+        else {
+            return
+        }
         updateUI()
     }
     
