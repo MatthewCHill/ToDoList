@@ -30,8 +30,6 @@ class ToDoListStepsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoList?.task.count ?? 0
     }
@@ -73,15 +71,26 @@ class ToDoListStepsTableViewController: UITableViewController {
     func deleteTaskAndToDoWhenCompleted() {
         let alertController = UIAlertController(title: "All Done!", message: "Want us to delete this list?", preferredStyle: .alert)
         let dontDelete = UIAlertAction(title: "No", style: .cancel)
-        let yesDelete = UIAlertAction(title: "yes", style: .destructive)
+        let yesDelete = UIAlertAction(title: "Yes", style: .default) { _ in
+            guard let toDoList = self.toDoList else {return}
+            ToDoListController.shared.delete(toDoListToDelete: toDoList)
+            self.navigationController?.popViewController(animated: true)
+        }
         
         alertController.addAction(dontDelete)
         alertController.addAction(yesDelete)
         present(alertController, animated: true)
     }
 
-
-
+    func allTheTasksWereComplete() {
+        guard var toDoList = toDoList else {return}
+        for task in toDoList.task {
+            if task.isComplete == false {
+                return
+            }
+        }
+        deleteTaskAndToDoWhenCompleted()
+    }
 
 } // End Of class
 
@@ -93,14 +102,10 @@ extension ToDoListStepsTableViewController: TaskListTableViewCellDelegate {
         let toDoList = self.toDoList else {return}
         let task = toDoList.task[indexPath.row]
         TaskController().toggleIsCompleted(task: task)
-        if task.isComplete == true {
-            deleteTaskAndToDoWhenCompleted()
-        }
-        else {
-            return
-        }
+        allTheTasksWereComplete()
         updateUI()
     }
-    
-    
 }
+
+
+
