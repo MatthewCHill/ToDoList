@@ -16,11 +16,12 @@ class ToDoListController {
     
     // MARK: - CRUD FUNCTIONS
     
-    func createList() {
-        
+    func createList(name: String) {
+        let name = ToDoList(name: name)
+        toDoList.append(name)
     }
     
-    func deleteList() {
+    func deleteList(listToDelete: ToDoList) {
         
     }
     
