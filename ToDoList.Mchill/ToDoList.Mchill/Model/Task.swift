@@ -17,11 +17,11 @@ class Task {
         self.isComplete = isComplete
         self.id = id
     }
-}
+} // End of class
+
+// MARK: - Extension
 extension Task: Equatable {
     static func == (lhs: Task, rhs: Task) -> Bool {
         return lhs.id == rhs.id
     }
-    
-    
 }
