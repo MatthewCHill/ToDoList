@@ -22,10 +22,11 @@ class ToDoListController {
     }
     
     func deleteList(listToDelete: ToDoList) {
-        
+        guard let index = toDoList.firstIndex(of: listToDelete) else { return }
+        toDoList.remove(at: index)
     }
     
-    func toggleIsImportant() {
-        
+    func toggleIsImportant(isImportant: ToDoList) {
+        isImportant.isImportant.toggle()
     }
 }

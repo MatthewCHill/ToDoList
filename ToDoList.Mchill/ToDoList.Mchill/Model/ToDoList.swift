@@ -11,7 +11,7 @@ class ToDoList {
     
     let id: UUID
     let name: String
-    let isImportant: Bool
+    var isImportant: Bool
     let task: [Task]
     
     init(id: UUID = UUID(), name: String, isImportant: Bool = false, task: [Task] = []) {
