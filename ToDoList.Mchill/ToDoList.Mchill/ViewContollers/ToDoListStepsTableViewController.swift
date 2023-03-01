@@ -83,7 +83,7 @@ class ToDoListStepsTableViewController: UITableViewController {
     }
 
     func allTheTasksWereComplete() {
-        guard var toDoList = toDoList else {return}
+        guard let toDoList = toDoList else {return}
         for task in toDoList.task {
             if task.isComplete == false {
                 return
