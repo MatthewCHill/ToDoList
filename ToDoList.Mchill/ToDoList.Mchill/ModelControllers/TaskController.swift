@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+class TaskController {
+    
+    // MARK: - Properties
+    
+    
+    // MARK: - Crud Functions
+    
+    
+    // MARK: - Persistence
+    
+}
