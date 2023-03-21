@@ -12,7 +12,7 @@ class ToDoList: Codable {
     let id: UUID
     let name: String
     var isImportant: Bool
-    let task: [Task]
+    var task: [Task]
     
     init(id: UUID = UUID(), name: String, isImportant: Bool = false, task: [Task] = []) {
         self.id = id

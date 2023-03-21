@@ -8,8 +8,8 @@
 import Foundation
 
 class Task: Codable {
-    let name: String
-    let isComplete: Bool
+    var name: String
+    var isComplete: Bool
     let id: UUID
     
     init(name: String, isComplete: Bool = false, id: UUID = UUID()) {
