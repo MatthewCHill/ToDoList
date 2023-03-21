@@ -8,16 +8,36 @@
 import UIKit
 
 class ToDoListTableViewController: UITableViewController {
-
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var toDoListTextField: UITextField!
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func createToDoListButtonTapped(_ sender: Any) {
+        creatToDoList()
+        tableView.reloadData()
+    }
+    
+    // MARK: - Functions
+    
+    func creatToDoList() {
+        guard let toDoList = toDoListTextField.text, !toDoList.isEmpty else {return}
+        ToDoListController.shared.create(name: toDoList)
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return ToDoListController.shared.toDoLists.count
     }
 
     
@@ -34,10 +54,10 @@ class ToDoListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            let toDoListToDelete = ToDoListController.shared.toDoLists[indexPath.row]
+            ToDoListController.shared.delete(toDoListToDelete: toDoListToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     
 

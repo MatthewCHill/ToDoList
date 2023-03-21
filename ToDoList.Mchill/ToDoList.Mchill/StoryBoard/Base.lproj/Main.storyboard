@@ -37,7 +37,7 @@
                                             </constraints>
                                             <color key="tintColor" name="AccentColor"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" title="Clear">
+                                            <buttonConfiguration key="configuration" style="filled" title="Create">
                                                 <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                             </buttonConfiguration>
                                             <userDefinedRuntimeAttributes>
@@ -45,6 +45,9 @@
                                                     <integer key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="createToDoListButtonTapped:" destination="OOl-C9-K10" eventType="touchUpInside" id="myU-8g-Ast"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -131,6 +134,9 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Todo List" id="MTy-pK-oum"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="toDoListTextField" destination="cno-V7-24P" id="pWB-dg-d1L"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zqx-qe-JeH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
