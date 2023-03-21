@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ToDoList {
+class ToDoList: Codable {
     
     let id: UUID
     let name: String

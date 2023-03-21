@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Task {
+class Task: Codable {
     let name: String
     let isComplete: Bool
     let id: UUID
