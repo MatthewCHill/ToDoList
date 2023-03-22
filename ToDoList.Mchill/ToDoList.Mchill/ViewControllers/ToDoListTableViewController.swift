@@ -42,9 +42,13 @@ class ToDoListTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "toDoCell", for: indexPath) as? ToDoListTableViewCell else {return UITableViewCell()}
 
         // Configure the cell...
+        let toDoLists = ToDoListController.shared.toDoLists[indexPath.row]
+        cell.toDo = toDoLists
+        
+        cell.delegate = self
 
         return cell
     }
@@ -73,4 +77,14 @@ class ToDoListTableViewController: UITableViewController {
     }
     */
 
+} //end of class
+
+// MARK: - Extensions
+extension ToDoListTableViewController: ToDoListTableViewCellDelegate {
+    func importantButtonWasTapped(cell: ToDoListTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        let toDo = ToDoListController.shared.toDoLists[indexPath.row]
+        ToDoListController.shared.toggleIsImportant(toDoList: toDo)
+        cell.toDo = toDo
+    }
 }

@@ -7,17 +7,43 @@
 
 import UIKit
 
+protocol ToDoListTableViewCellDelegate: AnyObject {
+    func importantButtonWasTapped(cell: ToDoListTableViewCell)
+}
+
 class ToDoListTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var importantTaskButton: UIButton!
+    @IBOutlet weak var numberOfToDoLabel: UILabel!
+    @IBOutlet weak var toDoListNameLabel: UILabel!
+    
+    // MARK: - Properties
+    
+    weak var delegate: ToDoListTableViewCellDelegate?
+    
+    var toDo: ToDoList? {
+        didSet {
+            updateViews()
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    // MARK: - Functions
+    
+    func updateViews() {
+        guard let toDoList = toDo else {return}
+        toDoListNameLabel.text = toDoList.name
+        numberOfToDoLabel.text = String(toDoList.task.count)
+        
+        let image = toDoList.isImportant ? "checkmark.diamond.fill" : "checkmark.diamond"
+        importantTaskButton.setImage(UIImage(systemName: image), for: .normal)
     }
-
+    
+    // MARK: - Actions
+    
+    @IBAction func ImportantToDoButtonTapped(_ sender: Any) {
+        delegate?.importantButtonWasTapped(cell: self)
+    }
+    
 }
