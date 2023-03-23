@@ -19,6 +19,11 @@ class ToDoListTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     // MARK: - Actions
     
     @IBAction func createToDoListButtonTapped(_ sender: Any) {
@@ -67,15 +72,16 @@ class ToDoListTableViewController: UITableViewController {
 
 
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+        // In a storyboard-based application, you will often want to do a little preparation before navigation
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            guard segue.identifier == "toTaskList",
+                  let destinationVC = segue.destination as? TaskListTableViewController,
+                  let indexPath = tableView.indexPathForSelectedRow else {return}
+            let toDoList = ToDoListController.shared.toDoLists[indexPath.row]
+            destinationVC.toDoList = toDoList
+        }
 
 } //end of class
 

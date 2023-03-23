@@ -61,7 +61,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoCell" id="3YJ-3P-WbK">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoCell" id="3YJ-3P-WbK" customClass="ToDoListTableViewCell" customModule="ToDoList_Mchill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="120" width="393" height="62.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3YJ-3P-WbK" id="ZBU-OT-Gvv">
@@ -79,7 +79,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="checkmark.diamond" catalog="system"/>
                                                     <connections>
-                                                        <action selector="ImportantToDoButtonTapped:" destination="rvF-Qw-WQR" eventType="touchUpInside" id="hrN-Kt-cls"/>
+                                                        <action selector="ImportantToDoButtonTapped:" destination="3YJ-3P-WbK" eventType="touchUpInside" id="1vl-l6-c9N"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Things)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyG-3I-nSW">
@@ -113,11 +113,6 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="61" height="24.666666030883789"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </tableViewCellContentView>
-                                                    <connections>
-                                                        <outlet property="importantTaskButton" destination="zBi-wf-jvG" id="NdM-4F-heg"/>
-                                                        <outlet property="numberOfToDoLabel" destination="7B0-p2-Nga" id="jAy-bM-Z8W"/>
-                                                        <outlet property="toDoListNameLabel" destination="fyG-3I-nSW" id="vbV-RM-LoC"/>
-                                                    </connections>
                                                 </tableViewCell>
                                             </subviews>
                                         </stackView>
@@ -130,6 +125,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="importantTaskButton" destination="zBi-wf-jvG" id="2Ug-dE-SyB"/>
+                                    <outlet property="numberOfToDoLabel" destination="7B0-p2-Nga" id="eLu-tH-ZGU"/>
+                                    <outlet property="toDoListNameLabel" destination="fyG-3I-nSW" id="dWd-Vb-xAM"/>
                                     <segue destination="BnY-ny-KLO" kind="show" identifier="toTaskListVC" id="Zaf-xB-MMa"/>
                                 </connections>
                             </tableViewCell>
@@ -150,7 +148,7 @@
             </objects>
             <point key="canvasLocation" x="1590.0763358778624" y="211.97183098591552"/>
         </scene>
-        <!--Task List Table View Controller-->
+        <!--Task List-->
         <scene sceneID="COI-bf-Gow">
             <objects>
                 <tableViewController id="BnY-ny-KLO" customClass="TaskListTableViewController" customModule="ToDoList_Mchill" customModuleProvider="target" sceneMemberID="viewController">
@@ -166,19 +164,22 @@
                                     <rect key="frame" x="16" y="16" width="361" height="29"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Todo here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uJD-wA-3ov">
-                                            <rect key="frame" x="0.0" y="0.0" width="276" height="29"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="257" height="29"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZw-AS-rgr">
-                                            <rect key="frame" x="286" y="0.0" width="75" height="29"/>
+                                            <rect key="frame" x="267" y="0.0" width="94" height="29"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="Add Task"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <integer key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="createTaskButtonTapped:" destination="BnY-ny-KLO" eventType="touchUpInside" id="SIC-ai-qju"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                 </stackView>
@@ -192,7 +193,7 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="73" id="RV7-ci-IOk" customClass="TaskListTableViewCell" customModule="ToDoList_Mchill" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" rowHeight="73" id="RV7-ci-IOk" customClass="TaskTableViewCell" customModule="ToDoList_Mchill" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="111" width="393" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RV7-ci-IOk" id="Yl9-mG-6ti">
@@ -212,6 +213,9 @@
                                                     <rect key="frame" x="288" y="0.0" width="49" height="35"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="checkmark.square" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="taskCompletedButtonTapped:" destination="RV7-ci-IOk" eventType="touchUpInside" id="WPY-Jd-I1Z"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -223,6 +227,10 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="zUK-1V-eR6" secondAttribute="bottom" constant="8" id="rwv-TR-hL0"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskCompletedButton" destination="4tO-rE-0Vg" id="oBR-sD-Y4z"/>
+                                    <outlet property="taskNameLabel" destination="b7q-4t-anN" id="ePF-hS-HyM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -230,7 +238,10 @@
                             <outlet property="delegate" destination="BnY-ny-KLO" id="eNb-am-s7p"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="o6b-Ep-fJB"/>
+                    <navigationItem key="navigationItem" title="Task List" id="o6b-Ep-fJB"/>
+                    <connections>
+                        <outlet property="taskTextField" destination="uJD-wA-3ov" id="q8B-IS-r6H"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvb-nX-BXN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
